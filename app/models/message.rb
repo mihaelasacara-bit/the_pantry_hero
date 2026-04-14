@@ -1,3 +1,3 @@
 class Message < ApplicationRecord
-  belongs_to :chatbot_conversation
+  belongs_to :chat
 end
