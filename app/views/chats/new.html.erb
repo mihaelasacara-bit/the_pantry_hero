@@ -1,0 +1,6 @@
+<p>chat html</p>
+
+<%= simple_form_for @tweet do |f| %>
+  <%= f.input :long, required: true, label: "Copy and paste a long text here" %>
+  <%= f.button :submit, 'Create tweet', class: 'btn btn-primary' %>
+<% end %>
