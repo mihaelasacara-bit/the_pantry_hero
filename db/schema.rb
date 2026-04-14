@@ -10,9 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_13_135820) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_14_092948) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "meal_plans", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.date "start_date"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_meal_plans_on_user_id"
+  end
+
+  create_table "recipes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "ingredients"
+    t.text "instructions"
+    t.bigint "meal_plan_id", null: false
+    t.integer "recipe_day"
+    t.string "type"
+    t.datetime "updated_at", null: false
+    t.index ["meal_plan_id"], name: "index_recipes_on_meal_plan_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -25,4 +44,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_13_135820) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "meal_plans", "users"
+  add_foreign_key "recipes", "meal_plans"
 end
