@@ -1,2 +1,20 @@
-<p>chat html</p>
-<p>just a test</p>
+<%= link_to "← Meal plan", meal_plan_path(@chat.meal_plan) %>
+<div class="row">
+  <div class="col">
+    <h1><%= @meal_plan.start_date %> Meal plan</h1>
+  </div>
+  <% @chat.messages.each do |message| %>
+  <p>
+    <strong><%= message.role %></strong>
+    <%= message.content %>
+  </p>
+  <% end %>
+  <div>
+    <div id="new_message_container">
+      <%= simple_form_for [@chat, @message] do |f| %>
+        <%= f.input :content, label: "What's your main goal with this meal plan — are you trying to eat healthier, save time during the week, reduce food waste, or something else?", required: true, placeholder: "Help me create a meal plan for the next week!" %>
+        <%= f.button :submit, 'Ask Pantry Hero', class: 'btn btn-outline-success' %>
+      <% end %>
+    </div>
+  </div>
+</div>

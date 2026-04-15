@@ -7,7 +7,7 @@ class ChatsController < ApplicationController
     @chat.user = current_user
 
     if @chat.save
-      redirect_to chat_path(@chat) # create show page of chat
+      redirect_to chat_path(@chat)
     else
       @chats = @meal_plan_chat.where(user: current_user)
       render "meal_plans/show"
@@ -16,5 +16,7 @@ class ChatsController < ApplicationController
 
   def show
     @chat = Chat.find(params[:id])
+    @meal_plan = @chat.meal_plan
+    @message = Message.new
   end
 end

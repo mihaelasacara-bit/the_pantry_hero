@@ -1,5 +1,5 @@
 class Chat < ApplicationRecord
   belongs_to :user
-  belongs_to :meal_plan, dependent: :destroy
+  belongs_to :meal_plan
   has_many :messages, dependent: :destroy
 end
