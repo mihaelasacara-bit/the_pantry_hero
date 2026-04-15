@@ -1,0 +1,15 @@
+<div class="container">
+  <% if message.role == "user" %>
+    <div class="row d-flex justify-content-end mb-2">
+      <div class="col-6 bg-white px-3 pb-3 pt-3 rounded-pill">
+        <%= message.content %>
+      </div>
+    </div>
+    <% elsif message.role == "assistant" %>
+      <div class="row mb-5">
+        <div class="col-6 px-3 pb-3 pt-3 bg-white d-flex justify-content-start rounded-5">
+          <%= message.content %>
+        </div>
+      </div>
+  <% end %>
+</div>
