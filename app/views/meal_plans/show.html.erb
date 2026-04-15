@@ -1,11 +1,7 @@
-<h1>Meal Plan</h1>
-
-<%= button_to "Create chat", meal_plan_chats_path(@meal_plan) %>
-
 <div class="container py-4">
-  <h1 class="mb-4">Meal Plan</h1>
+  <h1 class="mb-4"><%= @meal_plan.start_date %> Meal Plan</h1>
 
-  <%= button_to "Create chat", meal_plan_chats_path(@meal_plan), class: "btn btn-primary mb-4" %>
+  <%= button_to "Create Chat with Assistant", meal_plan_chats_path(@meal_plan), method: :post, class: "btn btn-success mb-4" %>
 
   <% @meal_plan.recipes.order(:recipe_day).each do |recipe| %>
     <div class="card mb-3 rounded-4">
