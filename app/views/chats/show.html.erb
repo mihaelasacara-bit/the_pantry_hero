@@ -1,12 +1,14 @@
-<%= link_to "← Meal plan", meal_plan_path(@chat.meal_plan), id: "backLink" %>
-<div class="row mt-3">
-  <div class="col">
-    <h1><%= @meal_plan.start_date %> Meal plan</h1>
-  </div>
-  <div id="messages">
-    <%= render @chat.messages %>
-  </div>
-  <div id="new_message_container" class="col input-group mb-3">
-    <%= render "messages/form", chat: @chat, message: @message %>
+<div class="container py-4">
+  <%= link_to "← Meal plan", meal_plan_path(@chat.meal_plan), id: "backLink" %>
+  <div class="row mt-3">
+    <div class="col">
+      <h1><%= @meal_plan.start_date %> Meal plan</h1>
+    </div>
+    <div id="messages">
+      <%= render @chat.messages %>
+    </div>
+    <div id="new_message_container" class="col input-group mb-3">
+      <%= render "messages/form", chat: @chat, message: @message %>
+    </div>
   </div>
 </div>
