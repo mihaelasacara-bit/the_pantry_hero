@@ -1,1 +1,18 @@
-<p>chat html</p>
+ <%= link_to "← Meal plan", meal_plan_path(@chat.meal_plan) %>
+<div class="row">
+  <div class="col">
+    <h1><%= @meal_plan.start_date %> Meal plan</h1>
+  </div>
+  <div class="col-md-3">
+
+
+<h1 id="chat_title"><%= @chat.title %></h1>
+
+<div id="new_message_container">
+  <%= simple_form_for [@chat, @message] do |f| %>
+    <%= f.input :content, label: "Ask a question", required: true, placeholder: "Help me create a meal plan for the next week!" %>
+    <%= f.button :submit, 'Ask Pantry Hero', class: 'btn btn-primary' %>
+  <% end %>
+</div>
+  </div>
+</div>
