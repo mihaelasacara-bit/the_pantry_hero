@@ -10,20 +10,15 @@ class MessagesController < ApplicationController
     @message.role = "user"
 
     if @message.save
-      @ruby_llm_chat = RubyLLM.chat.with_temperature(0.8)
-      build_conversation_history
-      response = @ruby_llm_chat.with_instructions(SYSTEM_PROMPT).ask(@message.content)
-      Message.create(role: "assistant", content: response.content, chat: @chat)
+      # @ruby_llm_chat = RubyLLM.chat.with_temperature(0.8)
+      # response = @ruby_llm_chat.with_instructions(SYSTEM_PROMPT).ask(@message.content)
+
+      fake_text = "I am the Pantry Hero! You asked: #{@message.content}"
+      Message.create(role: "assistant", content: fake_text, chat: @chat)
 
       redirect_to chat_path(@chat)
     else
       render "chats/show", status: :unprocessable_entity
-    end
-  end
-
-  def build_conversation_history
-    @chat.messages.each do |message|
-      @ruby_llm_chat.add_message(message)
     end
   end
 
