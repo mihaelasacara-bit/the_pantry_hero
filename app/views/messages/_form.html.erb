@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-3">
   <%= simple_form_for [chat, message] do |f| %>
     <%= f.input :content, label: "What's your main goal with this meal plan — are you trying to eat healthier, save time during the week, reduce food waste, or something else?", required: true, placeholder: "Help me create a meal plan for the next week!" %>
     <%= f.button :submit, 'Ask Pantry Hero', class: 'btn btn-outline-success'  %>

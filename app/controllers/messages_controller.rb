@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-  SYSTEM_PROMPT = "You are an assitant that creates meal plans with 7 dinner recipes. / Tools: Use the create recipe tool to create the recipes and save them to the meal plan, one recipe per day. Include ingredients and instructions. After you create the plan, share a summary with the user."
+  SYSTEM_PROMPT = "You are an assitant that creates meal plans with 7 dinner recipes. / Tools: Use the create recipe tool to create the recipes and save them to the meal plan, one recipe per day. Include ingredients and instructions. After you create the plan, share a short summary in Markdown with the user."
 
   def create
     @chat = current_user.chats.find(params[:chat_id])
