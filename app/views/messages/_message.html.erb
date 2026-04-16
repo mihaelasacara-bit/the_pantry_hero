@@ -7,13 +7,9 @@
     </div>
     <% elsif message.role == "assistant" %>
       <div class="row mb-2">
-        <div class="col-auto px-3 pb-3 pt-3 d-flex justify-content-start rounded-5" id="assitantChat">
+        <%# <div class="col-auto px-3 pb-3 pt-3 d-flex justify-content-start rounded-5" id="assitantChat"> %>
+        <div class="col-auto px-3 pb-3 pt-3 d-flex justify-content-start rounded-5 assitantChat" id="<%= dom_id(message)%>">
           <%= message.content.present? ? raw(render_markdown(message.content)) : "..." %>
-        </div>
-      </div>
-      <div class="row mb-2">
-        <div class="col-auto px-3 pb-3 pt-3 d-flex justify-content-start rounded-5" id="mealPlanButton">
-          <%= link_to "See your meal plan", meal_plan_path(@chat.meal_plan) %>
         </div>
       </div>
   <% end %>

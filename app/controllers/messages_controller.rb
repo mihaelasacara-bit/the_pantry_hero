@@ -10,11 +10,11 @@ class MessagesController < ApplicationController
     @message.role = "user"
 
     if @message.save
-      @ruby_llm_chat = RubyLLM.chat.with_temperature(0.8)
-      build_conversation_history
-      @ruby_llm_chat.with_tool(CreateRecipeTool.new(user: current_user, meal_plan_id: @meal_plan.id))
-      response = @ruby_llm_chat.with_instructions(SYSTEM_PROMPT).ask(@message.content)
+      @assistant_message = @chat.messages.create(role: "assistant", content: "")
+
+      response = ask_llm
       @assistant_message = Message.create(role: "assistant", content: response.content, chat: @chat)
+      broadcast_replace(@assistant_message)
 
       respond_to do |format|
         format.turbo_stream # renders `app/views/messages/create.turbo_stream.erb`
@@ -27,11 +27,33 @@ class MessagesController < ApplicationController
 
   def build_conversation_history
     @chat.messages.each do |message|
+      next if message.content.blank?
+
       @ruby_llm_chat.add_message(message)
     end
   end
 
   private
+
+  def ask_llm
+    @ruby_llm_chat = RubyLLM.chat.with_temperature(0.8)
+    build_conversation_history
+
+    @ruby_llm_chat.with_tool(CreateRecipeTool.new(user: current_user, meal_plan_id: @meal_plan.id))
+    @ruby_llm_chat.with_instructions(SYSTEM_PROMPT).ask(@message.content)
+
+    @ruby_llm_chat.ask(@message.content) do |chunk|
+      next if chunk.content.blank?
+
+      @assistant_message.content += chunk.content
+      broadcast_replace(@assistant_message) # skip empty chunks
+    end
+  end
+
+  def broadcast_replace(message)
+    Turbo::StreamsChannel.broadcast_replace_to(@chat, target: helpers.dom_id(message), partial: "messages/message",
+                                                      locals: { message: message })
+  end
 
   def message_params
     params.require(:message).permit(:content)
