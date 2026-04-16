@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
       @assistant_message = @chat.messages.create(role: "assistant", content: "")
 
       response = ask_llm
-      @assistant_message = Message.create(role: "assistant", content: response.content, chat: @chat)
+      @assistant_message.update(content: response.content)
       broadcast_replace(@assistant_message)
 
       respond_to do |format|
@@ -25,6 +25,8 @@ class MessagesController < ApplicationController
     end
   end
 
+  private
+
   def build_conversation_history
     @chat.messages.each do |message|
       next if message.content.blank?
@@ -33,10 +35,8 @@ class MessagesController < ApplicationController
     end
   end
 
-  private
-
   def ask_llm
-    @ruby_llm_chat = RubyLLM.chat.with_temperature(0.8)
+    @ruby_llm_chat = RubyLLM.chat(model: 'gpt-4o-mini')
     build_conversation_history
 
     @ruby_llm_chat.with_tool(CreateRecipeTool.new(user: current_user, meal_plan_id: @meal_plan.id))
@@ -46,7 +46,7 @@ class MessagesController < ApplicationController
       next if chunk.content.blank?
 
       @assistant_message.content += chunk.content
-      broadcast_replace(@assistant_message) # skip empty chunks
+      broadcast_replace(@assistant_message)
     end
   end
 
