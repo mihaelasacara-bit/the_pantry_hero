@@ -6,3 +6,16 @@
 #assitantChat {
   background-color: rgba(0, 128, 0, 0.2);
 }
+
+.col-auto {
+  max-width: 70%;
+  flex-direction: column;
+}
+
+#mealPlanButton {
+  background-color: $green;
+  a {
+  text-decoration: none;
+  color: white;
+  }
+}
