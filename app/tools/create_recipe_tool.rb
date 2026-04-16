@@ -2,7 +2,7 @@ class CreateRecipeTool < RubyLLM::Tool
   description "Creates a recipe with ingredients and instructions for the current user and saves it in the database."
   param :ingredients, desc: "The ingredients needed for the recipe", type: :string
   param :instructions, desc: "The instructions of the recipe", type: :integer
-  param :recipe_day, desc: "The day of the meal plan on which of the recipe should be cooked, open per day from Day 1 to Day 7",
+  param :recipe_day, desc: "The day of the meal plan on which of the recipe should be cooked, one per day from Day 1 to Day 7",
                      type: :string
   param :type, desc: "The type of meal for the recipe, by default dinner only.", type: :integer
 
