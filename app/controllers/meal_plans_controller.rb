@@ -30,6 +30,20 @@ class MealPlansController < ApplicationController
     end
   end
 
+  def edit
+    @meal_plan = MealPlan.find(params[:id])
+  end
+
+  def update
+    @meal_plan = MealPlan.find(params[:id])
+
+    if @meal_plan.update(meal_plan_params)
+      redirect_to @meal_plan, notice: "Meal plan updated successfully."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def meal_plan_params
