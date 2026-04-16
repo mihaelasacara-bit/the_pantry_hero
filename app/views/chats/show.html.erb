@@ -5,7 +5,11 @@
       <h1><%= @meal_plan.start_date %> Meal plan</h1>
     </div>
     <div id="messages">
-      <%= render @chat.messages %>
+      <% if @chat.messages.count == 0 %>
+        <p class="text-muted">Enter a message to start talking with the AI agent.</p>
+      <% else %>
+        <%= render @chat.messages %>
+      <% end %>
     </div>
     <div id="new_message_container" class="col input-group mb-3">
       <%= render "messages/form", chat: @chat, message: @message %>
