@@ -16,7 +16,15 @@ class MealPlansController < ApplicationController
     @meal_plan.user = current_user
 
     if @meal_plan.save
-      redirect_to @meal_plan
+      @chat = Chat.new
+      @chat.meal_plan = @meal_plan
+      @chat.user = current_user
+      if @chat.save
+        redirect_to chat_path(@chat)
+      else
+        @chats = @meal_plan_chat.where(user: current_user)
+        render "meal_plans/show"
+      end
     else
       render :new, status: :unprocessable_entity
     end

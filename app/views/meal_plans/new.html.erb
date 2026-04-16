@@ -1,6 +1,9 @@
-<h1>New Meal Plan</h1>
-
-<%= simple_form_for @meal_plan do |f| %>
-  <%= f.input :start_date %>
-  <%= f.submit "Create Meal Plan" %>
-<% end %>
+<div class="container mt-5">
+  <h1>New Meal Plan</h1>
+  <div class="w-50">
+    <%= simple_form_for @meal_plan do |f| %>
+      <%= f.input :start_date, label: "When do you want your meal plan to start?" %>
+      <%= f.submit "Create Meal Plan", class: 'btn btn-outline-success' %>
+    <% end %>
+  </div>
+</div>
