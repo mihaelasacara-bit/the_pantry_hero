@@ -1,6 +1,6 @@
 class MealPlansController < ApplicationController
   def index
-    @meal_plans = MealPlan.all
+    @meal_plans = MealPlan.where(user: current_user)
   end
 
   def show
