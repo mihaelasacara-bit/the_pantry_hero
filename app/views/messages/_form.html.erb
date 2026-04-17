@@ -1,11 +1,10 @@
 <div class="container mt-3">
   <%= simple_form_for [chat, message] do |f| %>
-    <% placeholder_text = chat.messages.count == 0 ? "help me get a meal plan" : "add a new message" %>
+    <% placeholder_text = chat.messages.count == 0 ? "Help me get a meal plan" : "Add a new message" %>
 
     <%= f.input :content, 
-                label: "message", 
+                label: false, 
                 required: true, 
                 placeholder: placeholder_text %>
-    <%= f.button :submit, 'Ask Pantry Hero', class: 'btn btn-outline-success'  %>
   <% end %>
 </div>
