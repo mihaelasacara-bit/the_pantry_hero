@@ -6,7 +6,7 @@
   <% if @meal_plan.recipes.empty? %>
     <%= button_to "Create Chat with Assistant", meal_plan_chats_path(@meal_plan), method: :post, class: "btn btn-success mb-4" %>
   <% end %>
-  <% @meal_plan.recipes.order(:recipe_day).each do |recipe| %>
+  <% @meal_plan.recipes.first(7).each do |recipe| %>
     <div class="card mb-3 rounded-4">
       <div class="card-body">
         <h5 class="card-title">Day <%= recipe.recipe_day %></h5>
