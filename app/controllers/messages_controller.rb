@@ -43,6 +43,7 @@ class MessagesController < ApplicationController
       response = ask_llm
       @assistant_message.update(content: response.content)
       broadcast_replace(@assistant_message)
+      broadcast_replace_button(@meal_plan)
 
       respond_to do |format|
         format.turbo_stream # renders `app/views/messages/create.turbo_stream.erb`
@@ -83,6 +84,11 @@ class MessagesController < ApplicationController
   def broadcast_replace(message)
     Turbo::StreamsChannel.broadcast_replace_to(@chat, target: helpers.dom_id(message), partial: "messages/message",
                                                       locals: { message: message })
+  end
+
+  def broadcast_replace_button(meal_plan)
+    Turbo::StreamsChannel.broadcast_replace_to(@chat, target: helpers.dom_id(meal_plan), partial: "messages/button",
+                                                      locals: { meal_plan: @meal_plan })
   end
 
   def message_params
