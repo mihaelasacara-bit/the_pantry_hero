@@ -9,8 +9,10 @@
       <%= render @chat.messages %>
     </div>
     <div class="row mb-2">
-      <div class="col-auto p-3 m-3 d-flex justify-content-start rounded-5" id="mealPlanButton">
-        <%= link_to "See your meal plan", meal_plan_path(@chat.meal_plan) %>
+      <div class="p-3 d-flex justify-content-start" id="<%= dom_id(@meal_plan)%>">
+        <% unless @chat.messages.empty? %>
+          <%= render "messages/button", meal_plan: @meal_plan %>
+        <% end %>
       </div>
     </div>
     <div id="new_message_container" class="col input-group mb-3">
