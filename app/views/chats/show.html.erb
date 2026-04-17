@@ -9,7 +9,7 @@
       <%= render @chat.messages %>
     </div>
     <div class="row mb-2">
-      <div class="p-3 d-flex justify-content-start" id="<%= dom_id(@meal_plan)%>">
+      <div class="d-flex justify-content-start" id="<%= dom_id(@meal_plan)%>">
         <% unless @chat.messages.empty? %>
           <%= render "messages/button", meal_plan: @meal_plan %>
         <% end %>
