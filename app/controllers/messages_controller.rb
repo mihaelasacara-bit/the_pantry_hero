@@ -12,12 +12,12 @@ class MessagesController < ApplicationController
 
     - Then respond to the user with a Markdown summary using this exact structure:
 
-    # <Meal Plan Title>
+    Meal Plan Title
 
-    ## Overview
+    Overview
     - A short summary of the meal plan (2–3 sentences)
 
-    ## Meals
+    Meals
     - Day 1: <short description of the meal>
     - Day 2: <short description of the meal>
     - Day 3: <short description of the meal>
@@ -26,7 +26,6 @@ class MessagesController < ApplicationController
     - Day 6: <short description of the meal>
     - Day 7: <short description of the meal>
 
-    Do not include the title inside the overview. The title must appear only as the top-level heading.
   PROMPT
 
   def create
