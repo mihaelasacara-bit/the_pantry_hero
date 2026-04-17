@@ -13,6 +13,7 @@ class CreateRecipeTool < RubyLLM::Tool
 
   def execute(ingredients:, instructions:, recipe_day:, type:)
     meal_plan = MealPlan.find(@meal_plan_id)
+    # meal_plan_url = meal_plan_url(meal_plan)
     recipe = Recipe.create!(
       ingredients: ingredients,
       instructions: instructions,

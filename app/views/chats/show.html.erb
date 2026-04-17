@@ -6,15 +6,13 @@
       <h1><%= @meal_plan.start_date %> Meal plan</h1>
     </div>
     <div id="messages">
-      <% if @chat.messages.count == 0 %>
-        <p class="text-muted">Enter a message to start talking with the AI agent.</p>
-      <% else %>
         <%= render @chat.messages %>
-      <% end %>
     </div>
     <div class="row mb-2">
-      <div class="col-auto p-3 m-3 d-flex justify-content-start rounded-5" id="mealPlanButton">
-        <%= link_to "See your meal plan", meal_plan_path(@chat.meal_plan) %>
+      <div class="p-3 d-flex justify-content-start" id="<%= dom_id(@meal_plan)%>">
+        <% unless @chat.messages.empty? %>
+          <%= render "messages/button", meal_plan: @meal_plan %>
+        <% end %>
       </div>
     </div>
     <div id="new_message_container" class="col input-group mb-3">
