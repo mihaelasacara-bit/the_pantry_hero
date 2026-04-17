@@ -6,6 +6,6 @@
   </div>
   <% elsif message.role == "assistant" %>
     <div class="col-auto d-flex justify-content-start p-3 rounded-5 assitantChat" id="<%= dom_id(message)%>">
-      <%= message.content.present? ? raw(render_markdown(message.content)) : "..." %>
+      <%= message.content.present? ? raw(render_markdown(message.content)) : "Pantry Hero is thinking..." %>
     </div>
 <% end %>
