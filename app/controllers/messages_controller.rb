@@ -64,8 +64,8 @@ class MessagesController < ApplicationController
   end
 
   def ask_llm
-#     @ruby_llm_chat = RubyLLM.chat(model: 'gpt-4o-mini')
-    @ruby_llm_chat = RubyLLM.chat.with_temperature(0.8)
+    @ruby_llm_chat = RubyLLM.chat(model: 'gpt-4o-mini')
+    # @ruby_llm_chat = RubyLLM.chat.with_temperature(0.8)
     build_conversation_history
 
     @ruby_llm_chat.with_tool(CreateRecipeTool.new(user: current_user, meal_plan_id: @meal_plan.id))
