@@ -1,4 +1,7 @@
 <div class="container mt-5">
+
+<%= link_to "← Back", request.referer || meal_plans_path, id: "backLink" %>
+
   <h1>New Meal Plan</h1>
   <div class="w-50">
     <%= simple_form_for @meal_plan do |f| %>
